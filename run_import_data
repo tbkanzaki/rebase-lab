@@ -1,0 +1,12 @@
+#!/bin/bash
+
+docker run \
+  --rm \
+  --name rebase-import-csv \
+  -w /app \
+  -v $(pwd):/app \
+  -v labs-gems:/usr/local/bundle \
+  -v rebase-pg-data:/var/lib/postgresql/data \
+  --network rebase-labs-network \
+  ruby \
+  bash -c "bundle install && ruby import_from_csv.rb"

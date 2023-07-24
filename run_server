@@ -1,0 +1,12 @@
+#!/bin/bash
+
+docker run \
+  --rm \
+  --name server-sinatra \
+  -w /app \
+  -v $(pwd):/app \
+  -v labs-gems:/usr/local/bundle \
+  -p 3000:3000 \
+  --network rebase-labs-network \
+  ruby \
+  bash -c "bundle install && ruby server.rb"

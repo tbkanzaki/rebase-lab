@@ -1,0 +1,13 @@
+#!/bin/bash
+docker volume create rebase-pg-data
+docker network create rebase-labs-network 2>/dev/null || true
+
+docker run \
+  --rm \
+  --name rebase-pg \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=password \
+  -v rebase-pg-data:/var/lib/postgresql/data \
+  --network rebase-labs-network \
+  -d \
+  postgres
