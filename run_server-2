@@ -1,0 +1,12 @@
+#!/bin/bash
+
+docker run \
+  --rm \
+  --name server-2 \
+  -w /app \
+  -v $(pwd):/app \
+  -v labs-gems:/usr/local/bundle \
+  -p 4000:4000 \
+  --network rebase-labs-network \
+  ruby \
+  bash -c "bundle install && ruby server-2.rb"

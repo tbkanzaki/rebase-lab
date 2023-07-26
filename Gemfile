@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'pg'
 gem 'rack'
+gem 'rack-cors'
 gem 'sinatra'
 gem 'puma'
