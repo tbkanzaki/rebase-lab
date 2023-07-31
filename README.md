@@ -75,7 +75,7 @@ cd rebase-lab
 
 Suba os container para iniciar a aplicação:
 ```
-docker compose down
+docker compose up
 ```
 
 Abra o navegador para visualizar a aplicação:
@@ -117,6 +117,5 @@ docker compose down
 ```
 
 ## Status o projeto
-- Em desenvolvimento:
-  - Finalizado
-  - Pendente: Testes automatizados
+- Finalizado
+- Obs.: Ficaram pendente os testes automatizados
