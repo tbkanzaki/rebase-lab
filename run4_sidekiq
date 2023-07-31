@@ -2,11 +2,12 @@
 
 docker run \
   --rm \
-  --name server-1 \
+  --name sidekiq \
   -w /app \
   -v $(pwd):/app \
   -v labs-gems:/usr/local/bundle \
-  -p 3000:3000 \
   --network rebase-labs-network \
+  -e REDIS_URL=redis://redis:6379/0 \
+  -d \
   ruby \
-  bash -c "bundle install && ruby server-1.rb"
+  bash -c "bundle && bundle exec sidekiq -r ./worker.rb"

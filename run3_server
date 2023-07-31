@@ -2,11 +2,12 @@
 
 docker run \
   --rm \
-  --name server-sinatra \
+  --name server \
   -w /app \
   -v $(pwd):/app \
   -v labs-gems:/usr/local/bundle \
   -p 3000:3000 \
   --network rebase-labs-network \
+    -e REDIS_URL=redis://redis:6379/0 \
   ruby \
   bash -c "bundle install && ruby server.rb"

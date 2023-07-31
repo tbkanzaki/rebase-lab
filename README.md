@@ -8,9 +8,6 @@ As informações abaixo foram dadas pela Rebase como escopo e premissas para o d
 <br />
 Um dos objetivos do treinamento é aprender os comandos Docker, então inicialmente usarei scripts bash para criar e executar os containers docker.
 
-Na Feature 2, seguindo a linha de treinamento, a maior parte do HTML foi criada dinamicamente com javascript, assim como o estilo.
-Na tabela renderizada, há links para mostrar as informações do paciente e do médico em um modal. E outro link no token que exibe ao lado da tabela, as informações do paciente, do médico e os resultados dos exames.
-
 ---
 
 ## Tecnologias
@@ -63,12 +60,12 @@ Para melhorar isto, idealmente qualquer usuário da API poderia chamar um endpoi
 ## Rodando o projeto
 
 ### Pré-requisitos
-Certifique-se de ter o Docker instalado em sua máquina e o serviço iniciado.
+Certifique-se de ter o Docker instalado em sua máquina e o serviço iniciado. ( https://www.docker.com/ )
 <br />
 
 No terminal, clonar o projeto:
 ```
-git clone git@github.com:tbkanzaki/rebase-lab.git
+git clone https://github.com/tbkanzaki/rebase-lab.git
 ```
 
 Navegue para o diretório da aplicação:
@@ -76,76 +73,50 @@ Navegue para o diretório da aplicação:
 cd rebase-lab
 ```
 
-Suba o container do servidor de banco de dados (PostgreSQL):
+Suba os container para iniciar a aplicação:
 ```
-bash run_postgres
-```
-
-Suba o container responsável por importar os dados de um arquivo CSV para o banco de dados PostgreSQL:
-```
-bash run_import_data
-```
----
-
-1 - Para continuar a executar a Feature 1:
-<br />
-1.1 Suba o container do servidor da aplicação:
-```
-bash run_server
-```
-1.2 Abra o navegador com o endereço para visualizar o json com todos os campos:
-```
-http://localhost:3000/results-db
-```
----
-2 -  Para continuar a executar a Feature 2:
-<br />
-2.1 Suba o container do servidor da aplicação 1 em uma janela do terminal:
-```
-bash run_server-1
-```
-2.2 Abra o navegador com o endereço - porta 3000 - para visualizar o json com os campos que serão mostrados na tabela:
-```
-http://localhost:3000/results
+docker compose down
 ```
 
-2.3 Suba o container do servidor da aplicação 2 em outra janela do terminal:
+Abra o navegador para visualizar a aplicação:
 ```
-bash run_server-2
-```
-2.4 Abra o navegador com o endereço - porta 4000 - para visualizar os dados em uma tabela, com links:
-```
-http://localhost:4000/results
+http://localhost:3000
 ```
 ---
+### Endpoints da aplicação (API)
 
 Endpoint para visualizar todos os campos retornados do banco de dados, em formato JSON:
 ```
-http://localhost:3000/results-db
+http://localhost:3000/api/index
 ```
 
 Endpoint para visualizar os dados de um determinado exames (informando o token X58OZ4), retornados do banco de dados, em formato JSON:
 ```
-http://localhost:3000/results/X58OZ4
+http://localhost:3000/api/show/X58OZ4
 ```
 
 Do projeto original: endpoint para visualizar os dados importados do arquivo CSV, em formato JSON:
 ```
-http://localhost:3000/results-csv
+http://localhost:3000/api/csv-json
 ```
 
-Parar o servidor de banco de dados:
+Endpoint que importa arquivo CSV e insere no banco de dados:
 ```
-docker stop rebase-pg
+POST /import
+```
+---
+### Finalizando a aplicação
+Parar parar a aplicação:
+```
+pressione juntamente CTRL C
 ```
 
-Parar os servidores das aplicações em suas respectivas janelas:
+Parar remover os containers:
 ```
-pressione "CTRL + C" duas vezes
+docker compose down
 ```
 
 ## Status o projeto
 - Em desenvolvimento:
-  - Finalizada: Feature 1 e Feature 2
-  - Em andamento: Feature 3
-  - Pendente: Feature 4
+  - Finalizado
+  - Pendente: Testes automatizados

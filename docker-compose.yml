@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  rebase-pg:
+    image: postgres
+    container_name: rebase-pg
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    volumes:
+      - rebase-pg-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    container_name: redis
+
+  server:
+    image: ruby
+    container_name: server
+    working_dir: /app
+    volumes:
+      - .:/app
+      - labs-gems:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - rebase-pg
+      - redis
+    command: bash -c "bundle install && ruby server.rb"
+
+  sidekiq:
+    image: ruby
+    container_name: sidekiq
+    working_dir: /app
+    volumes:
+      - .:/app
+      - labs-gems:/usr/local/bundle
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    command: bash -c "bundle && bundle exec sidekiq -r ./worker.rb"
+    depends_on:
+      - redis
+      - server
+
+volumes:
+  rebase-pg-data:
+  labs-gems:

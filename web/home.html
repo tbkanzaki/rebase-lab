@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RebaseLab</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <div id="navDiv"></div>
+    </header>
+    <main>
+      <div class="container-sm text-center">
+        <h1>Exames</h1>
+        <div class="row">
+          <div class="col">
+            <span class="fs-4">Upload do CSV</span>
+          </div>
+          <div class="col">
+          </div>
+          <div class="col">
+            <span class="fs-4">Busca por Token</span>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col">
+            <form id="csvForm" class="d-flex" enctype="multipart/form-data">
+              <input type="file" class="form-control me-2" name="csvFile" id="csvFile" accept=".csv" />
+              <button class="btn btn-outline-info" type="submit">Enviar</button>
+            </form>
+          </div>
+          <div class="col">
+
+          </div>
+          <div class="col">
+            <form id="searchForm">
+              <input class="form-control me-2" type="text" placeholder="Informe o Token" id="search">
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div id="status"></div>
+          </div>
+          <div class="col">
+
+          </div>
+          <div class="col">
+            <h4 id="message" class="text-danger"></h4>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="nav.js"></script>
+    <script src="home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+  </body>
+</html>
