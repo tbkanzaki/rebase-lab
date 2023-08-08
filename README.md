@@ -19,6 +19,8 @@ Um dos objetivos do treinamento é aprender os comandos Docker, então inicialme
 * Javascript
 * HTML
 * CSS
+* Rspec
+* Rack-Test
 
 ---
 
@@ -75,13 +77,20 @@ cd rebase-lab
 
 Suba os container para iniciar a aplicação:
 ```
-docker compose up
+bash bin/up_app
+
+Ou
+
+bin/up_app
 ```
 
 Abra o navegador para visualizar a aplicação:
 ```
 http://localhost:3000
 ```
+
+Obs.: Para visualizar os exames, deve-se primeiro fazer o upload do arquivo CSV na página inicial.
+
 ---
 ### Endpoints da aplicação (API)
 
@@ -105,17 +114,35 @@ Endpoint que importa arquivo CSV e insere no banco de dados:
 POST /import
 ```
 ---
+### Rodando os testes
+
+Abra uma outra janela do terminal, e vá para o diretório da aplicação e rode o comando:
+<br/>
+Obs.: Para rodar os testes, a aplicação deve estar rodando.
+```
+bash bin/rspec
+
+Ou
+
+bin/rspec
+```
+
+---
 ### Finalizando a aplicação
 Parar parar a aplicação:
 ```
-pressione juntamente CTRL C
+pressione CTRL + C
 ```
 
-Parar remover os containers:
+Parar remover os containers e os volumes:
 ```
-docker compose down
+bash bin/down_app
+
+Ou
+
+bin/down_app
 ```
 
 ## Status o projeto
 - Finalizado
-- Obs.: Ficaram pendente os testes automatizados
+- Iniciados os testes automatizados (ainda irei implementar mais testes)

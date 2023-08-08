@@ -28,8 +28,16 @@ function fetchAndDisplayData() {
       };
 
       const headersShowTable = ['cpf', 'name', 'crm', 'doctor_name', 'result_token', 'result_date'];
-
-       data.forEach(function(exame) {
+      if (data.error) {
+        const errorRow = document.createElement('tr');
+        const errorCol = document.createElement('td');
+        errorCol.textContent = `${data.error}`;
+        errorCol.colSpan = headersShowTable.length;
+        errorCol.classList.add('error-cell');
+        errorRow.appendChild(errorCol);
+        fragmentRow.appendChild(errorRow);
+      } else {
+        data.forEach(function(exame) {
         const bodyRow = document.createElement('tr');
         headersShowTable.forEach(function(header) {
           const bodyCol = document.createElement('td');
@@ -68,7 +76,8 @@ function fetchAndDisplayData() {
         });
         bodyRow.appendChild(fragmentCol);
         fragmentRow.appendChild(bodyRow);
-      });
+        });
+      };
       tbody.appendChild(fragmentRow);
       table.appendChild(tbody);
       document.querySelector('.table-div').appendChild(table);

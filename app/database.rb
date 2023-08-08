@@ -11,9 +11,34 @@ module Database
     PG.connect(db_config)
   end
 
-  def self.create_tables
-    conn = get_connection
+  # def connect_db_test
+  #   db_config = {
+  #     host: 'rebase-pg',
+  #     user: 'admin',
+  #     password: 'password',
+  #     dbname: 'rebase-db-test'
+  #   }
+  #   PG.connect(db_config)
+  # end
 
+
+  def self.delete_data(conn)
+    conn.exec("DELETE FROM test_results;")
+    conn.exec("DELETE FROM tests;")
+    conn.exec("DELETE FROM doctors;")
+    conn.exec("DELETE FROM patients;")
+    conn.close
+  end
+
+  def self.drop_tables(conn)
+    conn.exec("DROP TABLE test_results;")
+    conn.exec("DROP TABLE tests;")
+    conn.exec("DROP TABLE doctors;")
+    conn.exec("DROP TABLE patients;")
+    conn.close
+  end
+
+  def self.create_tables(conn)
     conn.exec('CREATE TABLE IF NOT EXISTS patients (id SERIAL PRIMARY KEY,
                                                     cpf CHAR(14) UNIQUE NOT NULL,
                                                     name VARCHAR(150),
@@ -48,8 +73,7 @@ module Database
   conn.close
   end
 
-  def self.insert_data(data)
-    conn = get_connection
+  def self.insert_data(data,conn)
     data.each do |row|
       patient_not_exists = conn.exec_params('SELECT * FROM patients WHERE cpf = $1 LIMIT 1', [row['cpf']]).num_tuples.zero?
       if patient_not_exists
@@ -145,8 +169,8 @@ module Database
 
   def self.process_csv_file(csv_file)
     data = read_from_csv(csv_file)
-    create_tables
-    insert_data(data)
+    conn = get_connection
+    insert_data(data, conn)
   end
 
 end

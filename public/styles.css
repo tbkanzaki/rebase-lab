@@ -2,3 +2,8 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.error-cell {
+  text-align: center;
+  vertical-align: middle;
+}

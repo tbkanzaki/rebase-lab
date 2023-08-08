@@ -39,11 +39,11 @@ services:
       - labs-gems:/usr/local/bundle
     environment:
       REDIS_URL: redis://redis:6379/0
-    command: bash -c "bundle && bundle exec sidekiq -r ./worker.rb"
+    command: bash -c "bundle && bundle exec sidekiq -r ./app/worker.rb"
     depends_on:
       - redis
       - server
 
 volumes:
-  rebase-pg-data:
   labs-gems:
+  rebase-pg-data:
